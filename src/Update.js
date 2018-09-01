@@ -3,43 +3,35 @@ import UserForm from './UserForm'
 import axios from 'axios'
 
 export default class Update extends Component {
-  constructor(props) {
+  constructor(props){
   	super(props)
-  	this.state = {
-  	  name: ''
+  	this.state={
+  	  name:''
   	}
-  	this.handleChange = this.handleChange.bind(this)
-  	this.handleSubmit = this.handleSubmit.bind(this)
+  	this.onSubmit = this.onSubmit.bind(this)
+  	this.onChange = this.onChange.bind(this)
   }
 
-  handleChange(e){
-  	this.setState({name: e.target.value})
-  }
-
-  async handleSubmit(e){
+  async onSubmit(e){
   	e.preventDefault()
-  	const id = this.props.props.match.params.id
-  	await axios.put(`/api/users/update/${id}`, this.state)
-  	.then((res)=>console.log(res.data))
-  	const users = await axios.get('/api/users')
-  	console.log(users.data)
-  	this.props.rerender(users.data)
+  	const id = this.props.id
+  	const res = await axios.put(`/api/users/update/${id}`, this.state)
+  	this.props.update()
+ 	this.setState({name:''})
   }
 
-  // componentDidMount(){
-  // 	const id = this.props.props.match.params.id
-  // 	axios.get(`/api/users/${id}`)
-  // 	.then(res=>this.setState({name:res.data.name}))
-  // }
+  onChange(e){
+    this.setState({[e.target.name]:e.target.value})
+  }
 
   render() {
-  	const {handleSubmit, handleChange} = this;
   	const {name} = this.state;
+  	const {onChange, onSubmit} = this;
   	return (
   	  <div>
-  	    <h1>Update User</h1>
+  	    <h1>Update this!</h1>
   	    <hr />
-  	    <UserForm name={name} submit={handleSubmit} change={handleChange}/>
+  	    <UserForm name={name} change={onChange} submit={onSubmit}/>
   	  </div>
   	)
   }

@@ -1,14 +1,15 @@
-import React, {Component} from 'react'
+import React from 'react'
 
-export default function UserForm ({users, add, name, submit, change}){
 
-  	return(
-  	  <div>
-  	    <form onSubmit={submit}>
-	  	    <label htmlFor={name}></label>
-	  	    <input type='text' name='name' value={name} onChange={change}></input>
-	  	    <button type='submit'>Save</button>
-  	    </form>
-  	  </div>
-  	)
+export default function UserForm({name, change, submit}){
+
+  return (
+  	<div>
+  	  <form onSubmit={submit}>
+  	    <label></label>
+  	    <input type='text' name='name' value={name} onChange={change}></input>
+  	    <button>Submit</button>
+  	  </form>
+  	</div>
+  )
 }

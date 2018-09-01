@@ -1,26 +1,14 @@
-import React, {Component} from 'react'
-import axios from 'axios'
+import React from 'react'
 import SingleUser from './SingleUser'
 
-export default class AllUsers extends Component {
-  constructor(props) {
-  	super(props)
-  	this.state = {}
-  }
 
-  render() {
-  	const {users, remove} = this.props
-  	return (
-  	  <div>
-  	    <h1>Users</h1>
-  	    <hr />
-  	    {users.map((user)=>{
-  	      return(
-
-  	      	<SingleUser user={user} remove={remove}/>
-  	      )
-  	    })}
-  	  </div>
-  	)
-  }
+export default function AllUsers({users, remove}){
+  const listUsers = users.map(user=><SingleUser key={user.id} user={user} remove={remove}/>)
+  return (
+    <div>
+      <h1>All the Scrubs</h1>
+      <hr />
+      <ul>{listUsers}</ul>
+    </div>
+  )
 }
